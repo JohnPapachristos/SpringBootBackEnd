@@ -3,11 +3,10 @@
   ## --> This is my first try creating a project with Java Spring boot
   
   ## --> It does some simple thinks for example:
-  
-      * create, 
-      * delete, 
-      * update, 
-      * get
+   * create, 
+   * delete, 
+   * update, 
+   * get
     
   ## --> It also has testing code with an embeded database table
   
