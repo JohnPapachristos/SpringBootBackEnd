@@ -11,7 +11,7 @@ public class ApiError {
     private String message;
     private List<String> errors;
 
-    //lel
+    //
 
     public ApiError() {
         super();
@@ -31,7 +31,7 @@ public class ApiError {
         errors = Arrays.asList(error);
     }
 
-    //lel
+    //
 
     public HttpStatus getStatus() {
         return status;
