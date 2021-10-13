@@ -10,5 +10,6 @@
     
   ## --> It also has testing with an embeded database table
   
-  ## --> And code for hashing your password before putting it in the table (with MD5)
-
+  ## --> An extra feature is that there is code for hashing your password before putting it in the table (with MD5)
+   * If you want to check the password for a login, hash the given password with the same way and compare the results!
+  
