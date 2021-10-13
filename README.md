@@ -1,4 +1,4 @@
-### --------------- SPRING BOOT CODE FOR BACK END ---------------
+###  SPRING BOOT CODE FOR BACK END 
 
   ## --> This is my first try creating a project with Java Spring boot
   
