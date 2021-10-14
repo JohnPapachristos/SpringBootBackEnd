@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController // This means that this class is a Controller
-@RequestMapping("/Project")
+@RequestMapping("/User")
 @ResponseBody
 public class MainController {
   @Autowired // This means to get the bean called userRepository
@@ -25,12 +25,11 @@ public class MainController {
   private UserRepository userRepository;
 
   
-//----------------------Create values in my table with a different way----------------------------------
-//Writing my url with /createNew in the end we can create values in our table users
-//Ousiastika mpainoyn oi times sto usersRequests kai apo ekei me tis methodous poy exw ftiaxei pairnw ta dedomena kai ta bazw sthn class entity dld en telei sth bash  
+//----------------------Create values in my table----------------------------------
+//Writing my url with /create in the end we can create values in our table users
   
   @PostMapping("/create")
-  public Object create (@RequestBody UserRequest data) throws Exception {
+  public Object create(@RequestBody UserRequest data) throws Exception {
 	  User user = new User();
 	  PasswordHash pass = new PasswordHash();
 	  try {
@@ -57,14 +56,12 @@ public class MainController {
   }
 
   
-//----------------------Create values in my table with a different way----------------------------------
-//Writing my url with /createNew in the end we can update values in our table users
-// Me ton idio tropo pairnw ta dedomena apo to usersRequests dld me tis methodous kai afou prwta kanw elegxoys oti uparxoyn ta dedomena auta poy stelnw sth bash kanw ta katallhla updates  
-// Oi elegxoi poy kanw einai ths dikias moy epiloghs gia to id kai ta name kai email an uparxoyn, an den uparxoyn ennoeitai yparxei mhnyma gia enhmerwsh(json)  
+//----------------------Update values in my table -----------------------------------
+//Writing my url with /update in the end we can update values in our table users
 
   @PutMapping("/update")
   public Object update (@RequestBody UserRequest data) {
-	 User user = userRepository.findById(data.getId()).orElse(null); // na dw an tha mporesw na kanw throw exception kai na to diaxeiritsw
+	 User user = userRepository.findById(data.getId()).orElse(null); 
 	 try {
 		 if(user != null) {
 			  user.setUsername(data.getUsername());
@@ -94,11 +91,10 @@ public class MainController {
  
 //----------------------Delete values in my table----------------------------------
 // Writing my url with /delete in the end we can delete values from our table users
-// Kanw oti akrivws kanw kai sta parapanw apla edw o elegxos einai an ebale id o xrhsths kai katepektash elexgei an yparxei mesa sth bash gia na kanei to delete, an den yparxei tou gurnaw kai to katallhlo mhnyma me ena json
  
   	
 	@DeleteMapping("/delete/{id}")
-	public Object deleteUser (@PathVariable int id) {
+	public Object delete (@PathVariable int id) {
 		 User user = userRepository.findById(id).orElse(null);
 		 UserRequest data = new UserRequest();
 		 if(user != null) {
@@ -116,8 +112,9 @@ public class MainController {
 	
 //----------------------Get values in my table----------------------------------
 //Writing my url with /get in the end we can print values in our website or postman (localhost and port 8080)
-	@GetMapping("/resource")
-	public List<User> resource (@RequestBody UserRequest data) {
+	
+	@GetMapping("/read")
+	public List<User> read (@RequestBody UserRequest data) {
 		
 		if(data.getUsername() != null) {
 			return userRepository.findByUsername(data.getUsername());
@@ -133,8 +130,8 @@ public class MainController {
 		}
 	}
 
-	@GetMapping("/resource/{id}") 
-	public Object resourceById (@PathVariable Integer id) {
+	@GetMapping("/read/{id}") 
+	public Object readById (@PathVariable Integer id) {
 		User user = userRepository.findById(id).orElse(null);
 		UserRequest data = new UserRequest();
 		if(user != null) {
