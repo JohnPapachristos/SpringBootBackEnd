@@ -11,7 +11,7 @@ public class ApiError {
     private String message;
     private List<String> errors;
 
-    //
+    //error
 
     public ApiError() {
         super();
