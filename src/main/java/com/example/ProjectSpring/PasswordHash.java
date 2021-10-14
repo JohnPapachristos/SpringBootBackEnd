@@ -35,7 +35,6 @@ public class PasswordHash {
         {
             e.printStackTrace();
         }
-        System.out.println("------------------------------"+generatedPassword);
 		return generatedPassword;
     }
 }

@@ -15,7 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-//----------------------------------Before Testing my god, I must go to the User and change the table. I must put the table that I use for testing ---------------
+//----------------------------------Before Testing, I must go to the User and change the table. I must put the table that I use for testing ---------------
 //-------------------When all are ready, I do the same procedure backwards and run my app------------------------------------------------------------------
 
 
