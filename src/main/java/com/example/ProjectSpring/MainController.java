@@ -30,7 +30,7 @@ public class MainController {
 //Ousiastika mpainoyn oi times sto usersRequests kai apo ekei me tis methodous poy exw ftiaxei pairnw ta dedomena kai ta bazw sthn class entity dld en telei sth bash  
   
   @PostMapping("/create")
-  public Object createUser (@RequestBody UserRequest data) throws Exception {
+  public Object create (@RequestBody UserRequest data) throws Exception {
 	  User user = new User();
 	  PasswordHash pass = new PasswordHash();
 	  try {
@@ -63,7 +63,7 @@ public class MainController {
 // Oi elegxoi poy kanw einai ths dikias moy epiloghs gia to id kai ta name kai email an uparxoyn, an den uparxoyn ennoeitai yparxei mhnyma gia enhmerwsh(json)  
 
   @PutMapping("/update")
-  public Object updateUser (@RequestBody UserRequest data) {
+  public Object update (@RequestBody UserRequest data) {
 	 User user = userRepository.findById(data.getId()).orElse(null); // na dw an tha mporesw na kanw throw exception kai na to diaxeiritsw
 	 try {
 		 if(user != null) {
@@ -116,8 +116,8 @@ public class MainController {
 	
 //----------------------Get values in my table----------------------------------
 //Writing my url with /get in the end we can print values in our website or postman (localhost and port 8080)
-	@GetMapping("/get")
-	public List<User> findUsers (@RequestBody UserRequest data) {
+	@GetMapping("/resource")
+	public List<User> resource (@RequestBody UserRequest data) {
 		
 		if(data.getUsername() != null) {
 			return userRepository.findByUsername(data.getUsername());
@@ -133,8 +133,8 @@ public class MainController {
 		}
 	}
 
-	@GetMapping("/getOne/{id}") 
-	public Object findUser (@PathVariable Integer id) {
+	@GetMapping("/resource/{id}") 
+	public Object resourceById (@PathVariable Integer id) {
 		User user = userRepository.findById(id).orElse(null);
 		UserRequest data = new UserRequest();
 		if(user != null) {
