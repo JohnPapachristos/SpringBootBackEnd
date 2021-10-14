@@ -26,7 +26,7 @@ public class MainController {
 
   
 //----------------------Create values in my table----------------------------------
-//Writing my url with /create in the end we can create values in our table users
+//Writing my url with /create in the end we can create values in our table usersss
   
   @PostMapping("/create")
   public Object create(@RequestBody UserRequest data) throws Exception {
