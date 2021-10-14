@@ -1,14 +1,15 @@
-### --------------- SPRING BOOT CODE FOR BACK END ---------------
+###  SPRING BOOT CODE FOR BACK END 
 
-  ## --> This is my first try creating a project with Java Spring boot
+  ## --> This is a first try creating a project with Java Spring boot!
   
-  ## --> It does some simple thinks for example:
-   * CREATE, 
-   * DELETE, 
-   * UPDATE, 
-   * GET
+  ## --> It does some simple thinks in the table like:
+   * CREATE a User, 
+   * DELETE a User by his id, 
+   * UPDATE a User, 
+   * GET a User by his id or name or email, or get all Users that are in the table.
     
-  ## --> It also has testing code with an embeded database table
+  ## --> It also has testing with an embeded database table
   
-  ## --> And code for hashing the added password in the table (with MD5)
-
+  ## --> An extra feature is that there is code for hashing your password before putting it in the table (with MD5)
+   * If you want to check the password for a login, hash the given password with the same way and compare the results!
+  
