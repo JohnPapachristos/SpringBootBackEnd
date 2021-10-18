@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
+import static org.assertj.core.api.Assertions.assertThat;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 //----------------------------------Before Testing, I must go to the User and change the table. I must put the table that I use for testing ---------------
@@ -25,11 +25,14 @@ public class TestWebApp extends Testing {
 	@Autowired
 	private WebApplicationContext webApplicationContext;
 	
+	@Autowired
+	private MainController controller;
 	
 	private MockMvc mockMvc;
 
 	@Before
 	public void setup() {
+		assertThat(controller).isNotNull();
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 	
@@ -68,8 +71,7 @@ public class TestWebApp extends Testing {
 	public void testPut() throws Exception {
 		UserRequest userU = new UserRequest(30,"GeorgE","ggg@g.ge",23,"M");
 		ObjectMapper Obj = new ObjectMapper();  
-		String jsonStr1 = Obj.writeValueAsString(userU);  	
-		
+		String jsonStr1 = Obj.writeValueAsString(userU); 
 		//Testing put
 		this.mockMvc.perform(MockMvcRequestBuilders.put("/Project/update").content(jsonStr1).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
 		

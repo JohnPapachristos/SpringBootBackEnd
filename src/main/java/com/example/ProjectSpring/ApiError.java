@@ -5,13 +5,14 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+@JsonRootName(namespace="ApiError",value = "Bad Request")
 public class ApiError {
 
     private HttpStatus status;
     private String message;
     private List<String> errors;
 
-    //error-here-no-error-error-error-1-2
 
     public ApiError() {
         super();
@@ -31,7 +32,6 @@ public class ApiError {
         errors = Arrays.asList(error);
     }
 
-    //aa-1-2
     
     public HttpStatus getStatus() {
         return status;

@@ -35,6 +35,10 @@ public class PasswordHash {
         {
             e.printStackTrace();
         }
+		catch (java.lang.NullPointerException e) 
+        {
+            e.getLocalizedMessage();
+        }
 		return generatedPassword;
     }
 }

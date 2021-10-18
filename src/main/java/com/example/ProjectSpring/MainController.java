@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +30,7 @@ public class MainController {
 //Writing my url with /create in the end we can create values in our table usersss
   
   @PostMapping("/create")
-  public Object create(@RequestBody UserRequest data) throws Exception {
+  public ResponseEntity<Object> create(@RequestBody UserRequest data) throws Exception {
 	  User user = new User();
 	  PasswordHash pass = new PasswordHash();
 	  try {
@@ -42,14 +43,14 @@ public class MainController {
 		  pass.setPasswordToHash(data.getPassword());
 		  user.setPassword(pass.getGeneratedPassword());
 		  user.setDate(dtf.format(now));
-		  return userRepository.save(user);
+		  return ResponseEntity.ok(userRepository.save(user));
 	  }
 	  catch(DataIntegrityViolationException ex) {
 		  final String message1 = "Not null values OR Username exists OR Email exists";
 		  final String message2 = " "+ex.getMostSpecificCause();
 		  data.setError(message1);
 		  data.setSpeError(message2);
-		  return  data;
+		  return  ResponseEntity.ok(data);
 	  }
 	  
 	 
@@ -60,7 +61,7 @@ public class MainController {
 //Writing my url with /update in the end we can update values in our table users
 
   @PutMapping("/update")
-  public Object update (@RequestBody UserRequest data) {
+  public ResponseEntity<Object> update (@RequestBody UserRequest data) {
 	 User user = userRepository.findById(data.getId()).orElse(null); 
 	 try {
 		 if(user != null) {
@@ -71,10 +72,10 @@ public class MainController {
 			  DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 			  LocalDateTime now = LocalDateTime.now();  
 			  user.setDate(dtf.format(now));
-			  return userRepository.save(user);
+			  return ResponseEntity.ok(userRepository.save(user));
 		 }
 		 else {
-			 return user;
+			 return ResponseEntity.ok(user);
 		 }
 	 }
 	 catch(DataIntegrityViolationException ex) {
@@ -83,7 +84,7 @@ public class MainController {
 		 final String message2 = " "+ex.getMostSpecificCause();
 		 data.setError(message1);
 		 data.setSpeError(message2);
-		 return  data;
+		 return  ResponseEntity.ok(data);
 	     
 	 }
 	 
@@ -94,25 +95,24 @@ public class MainController {
  
   	
 	@DeleteMapping("/delete/{id}")
-	public Object delete (@PathVariable int id) {
+	public ResponseEntity<Object> delete (@PathVariable int id) {
 		 User user = userRepository.findById(id).orElse(null);
 		 UserRequest data = new UserRequest();
 		 if(user != null) {
 			 userRepository.deleteById(id);
 			 String message = "Deleted value with the id: "+id;
 			 data.setMessage(message);
-			 return data;
+			 return ResponseEntity.ok(data);
 		 }
 		 else {
 			 String message = "Error this id: "+id+" "+"has no matches";
 			 data.setError(message);
-			 return data;
+			 return ResponseEntity.ok(data);
 		 }
 	}
 	
 //----------------------Get values in my table----------------------------------
 //Writing my url with /get in the end we can print values in our website or postman (localhost and port 8080)
-	
 	@GetMapping("/read")
 	public List<User> read (@RequestBody UserRequest data) {
 		
@@ -131,16 +131,16 @@ public class MainController {
 	}
 
 	@GetMapping("/read/{id}") 
-	public Object readById (@PathVariable Integer id) {
+	public ResponseEntity<Object> readById (@PathVariable Integer id) {
 		User user = userRepository.findById(id).orElse(null);
 		UserRequest data = new UserRequest();
 		if(user != null) {
-			return user;
+			return ResponseEntity.ok(data);
 		}
 		else {
 			String message = "This id: "+id+" has no matches";
 			data.setMessage(message);
-			return data;
+			return ResponseEntity.ok(data);
 		}
 		
 	}
